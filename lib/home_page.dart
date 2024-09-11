@@ -15,6 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final String boxFilename = "boxDb";
   TextEditingController writeBoxField = TextEditingController();
   TextEditingController readBoxField  = TextEditingController();
+  TextEditingController deleteBoxField  = TextEditingController();
 
   @override
   @override
@@ -39,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // Read
   void readData() {
     // Read the Key/Value pair
-    print(_boxDatabase?.get(1));
+    // print(_boxDatabase?.get(1));
 
     // Validate data entry
     readBoxField.text = _boxDatabase?.get(1) ?? "No Record";
@@ -50,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Delete the Key/Value pair
     print(_boxDatabase?.delete(1));
     print('Delete action');
+    deleteBoxField.text = "Record deleted";
   }
 
   @override
@@ -58,104 +60,139 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: const Text("Hive Demo"),
         ),
-        body: Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("Database Info:", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-                SizedBox(
-                    width: double.infinity,
-                    child:
-                    Text("Database: $boxFilename"),
-                ),
-                const Divider(),
-                const SizedBox(height:10),
+        body: SingleChildScrollView(
+          child: Container(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Database Info:", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                  SizedBox(
+                      width: double.infinity,
+                      child:
+                      Text("Database: $boxFilename"),
+                  ),
+                  const Divider(),
+                  const SizedBox(height:10),
 
-                const Text("Write Database:", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-                const Text("Press the button to read from the database:", style: TextStyle(fontSize: 16.0)),
-                Card(
-                  // color: Colors.transparent,
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    // Adjust the radius as needed
-                    side: const BorderSide(
-                      // color: Colors.grey.withOpacity(0.5),
-                      // Set the opacity to 0.5 (50%)
-                      width: 1.0,
+                  const Text("Write Database:", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                  const Text("Press the button to read from the database:", style: TextStyle(fontSize: 16.0)),
+                  Card(
+                    // color: Colors.transparent,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      // Adjust the radius as needed
+                      side: const BorderSide(
+                        // color: Colors.grey.withOpacity(0.5),
+                        // Set the opacity to 0.5 (50%)
+                        width: 1.0,
+                      ),
                     ),
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 100,
-                          child: TextField(
-                            controller: writeBoxField,
-                            decoration:
-                                const InputDecoration(hintText: 'Database Input'),
+                    child: Container(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 100,
+                            child: TextField(
+                              controller: writeBoxField,
+                              decoration:
+                                  const InputDecoration(hintText: 'Database Input'),
+                            ),
                           ),
-                        ),
-                        MaterialButton(
-                          onPressed: writeData,
-                          color: Colors.blue,
-                          child: const Text('Write'),
-                        ),
-                      ],
+                          MaterialButton(
+                            onPressed: writeData,
+                            color: Colors.blue,
+                            child: const Text('Write'),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const Divider(),
-                const SizedBox(height: 10),
+                  const Divider(),
+                  const SizedBox(height: 10),
 
-                const Text("Database Read:", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-                const Text("Press the button to read from the database:", style: TextStyle(fontSize: 16.0)),
-                Card(
-                  // color: Colors.transparent,
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    // Adjust the radius as needed
-                    side: const BorderSide(
-                      // color: Colors.grey.withOpacity(0.5),
-                      // Set the opacity to 0.5 (50%)
-                      width: 1.0,
+                  const Text("Database Read:", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                  const Text("Press the button to read from the database:", style: TextStyle(fontSize: 16.0)),
+                  Card(
+                    // color: Colors.transparent,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      // Adjust the radius as needed
+                      side: const BorderSide(
+                        // color: Colors.grey.withOpacity(0.5),
+                        // Set the opacity to 0.5 (50%)
+                        width: 1.0,
+                      ),
                     ),
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 100,
-                          child: TextField(
-                            controller: readBoxField,
-                            readOnly: true,
-                            decoration:
-                            const InputDecoration(hintText: 'Database output'),
+                    child: Container(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 100,
+                            child: TextField(
+                              controller: readBoxField,
+                              readOnly: true,
+                              decoration:
+                              const InputDecoration(hintText: 'Database output'),
+                            ),
                           ),
-                        ),
-                        MaterialButton(
-                          onPressed: readData,
-                          color: Colors.blue,
-                          child: const Text('Read'),
-                        ),
-                      ],
+                          MaterialButton(
+                            onPressed: readData,
+                            color: Colors.blue,
+                            child: const Text('Read'),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const Divider(),
-                const SizedBox(height: 10),
-                const Text("Database Delete:", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-                const Text("Press the button to delete from the database:", style: TextStyle(fontSize: 16.0)),
-                MaterialButton(
-                  onPressed: deleteData,
-                  color: Colors.blue,
-                  child: const Text('Delete'),
-                )
-              ],
-            ))); // This trailing comma makes auto-formatting nicer for build methods.
+                  const Divider(),
+                  const SizedBox(height: 10),
+                  const Text("Database Delete:", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                  const Text("Press the button to delete from the database:", style: TextStyle(fontSize: 16.0)),
+                  Card(
+                    // color: Colors.transparent,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      // Adjust the radius as needed
+                      side: const BorderSide(
+                        // color: Colors.grey.withOpacity(0.5),
+                        // Set the opacity to 0.5 (50%)
+                        width: 1.0,
+                      ),
+                    ),
+                    child: Container(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 100,
+                            child: TextField(
+                              controller: deleteBoxField,
+                              readOnly: true,
+                              decoration:
+                              const InputDecoration(hintText: 'Database deletion'),
+                            ),
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: MaterialButton(
+                              onPressed: deleteData,
+                              color: Colors.blue,
+                              child: const Text('Delete'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              )),
+        )); // This trailing comma makes auto-formatting nicer for build methods.
   }
 }
