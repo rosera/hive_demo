@@ -7,7 +7,7 @@ Demonstration of Hive local storage
 - [x] Read from Box/Database
 - [x] Delete from Box/Database
 
-![Hive Demo](https://github.com/rosera/hive_demo/blob/main/snapshot/hive_demo.png "Mobile App")
+![Hive Demo](https://github.com/rosera/hive_demo/blob/main/screenshots/hive_demo.png "Mobile App")
 
 ## Packages
 
